@@ -41,28 +41,27 @@ class _ProfileSwipeCardState extends State<ProfileSwipeCard>
   static const double _swipeThreshold = 0.25;
   static const double _maxRotationDeg = 15.0;
 
-  void _onHorizontalDragStart(DragStartDetails details) {
-    // Only track horizontal delta
+  void onHorizontalDragStart(DragStartDetails details) {
   }
 
-  void _onHorizontalDragUpdate(DragUpdateDetails details) {
+  void onHorizontalDragUpdate(DragUpdateDetails details) {
     setState(() {
       _dragOffset = Offset(_dragOffset.dx + details.delta.dx, 0);
     });
   }
 
-  void _onHorizontalDragEnd(DragEndDetails details) {
+  void onHorizontalDragEnd(DragEndDetails details) {
     final screenWidth = MediaQuery.of(context).size.width;
     final threshold = screenWidth * _swipeThreshold;
 
     if (_dragOffset.dx.abs() > threshold) {
-      _flyOff(_dragOffset.dx > 0);
+      flyOff(_dragOffset.dx > 0);
     } else {
-      _snapBack();
+      snapBack();
     }
   }
 
-  void _flyOff(bool isRight) {
+  void flyOff(bool isRight) {
     final screenWidth = MediaQuery.of(context).size.width;
     final target = isRight ? screenWidth * 1.5 : -screenWidth * 1.5;
 
@@ -98,7 +97,7 @@ class _ProfileSwipeCardState extends State<ProfileSwipeCard>
     flyController.forward();
   }
 
-  void _snapBack() {
+  void snapBack() {
     final snapController = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 350),
@@ -144,9 +143,9 @@ class _ProfileSwipeCardState extends State<ProfileSwipeCard>
     final cardH = screenH * 0.77;
 
     return GestureDetector(
-      onHorizontalDragStart: _onHorizontalDragStart,
-      onHorizontalDragUpdate: _onHorizontalDragUpdate,
-      onHorizontalDragEnd: _onHorizontalDragEnd,
+      onHorizontalDragStart: onHorizontalDragStart,
+      onHorizontalDragUpdate: onHorizontalDragUpdate,
+      onHorizontalDragEnd: onHorizontalDragEnd,
       onTap: widget.onTap,
       child: Transform.translate(
         offset: _dragOffset,
@@ -154,7 +153,7 @@ class _ProfileSwipeCardState extends State<ProfileSwipeCard>
           angle: _currentRotation,
           child: Opacity(
             opacity: _dragOpacity,
-            child: _CardContent(
+            child: CardContent(
               user: widget.user,
               isVerified: widget.isVerified,
               cardHeight: cardH,
@@ -170,9 +169,8 @@ class _ProfileSwipeCardState extends State<ProfileSwipeCard>
   }
 }
 
-// ─── Card Content ─────────────────────────────────────────────────────────────
 
-class _CardContent extends StatelessWidget {
+class CardContent extends StatelessWidget {
   final UserEntity user;
   final bool isVerified;
   final double cardHeight;
@@ -181,7 +179,7 @@ class _CardContent extends StatelessWidget {
   final VoidCallback? onLike;
   final double dragOffsetX;
 
-  const _CardContent({
+  const CardContent({
     required this.user,
     this.isVerified = false,
     required this.cardHeight,
@@ -201,7 +199,6 @@ class _CardContent extends StatelessWidget {
       child: Stack(
         clipBehavior: Clip.none,
         children: [
-          // Main card
           Positioned.fill(
             child: Container(
               decoration: BoxDecoration(
@@ -219,18 +216,15 @@ class _CardContent extends StatelessWidget {
               child: Stack(
                 fit: StackFit.expand,
                 children: [
-                  // Photo
-                  _ProfilePhoto(photoUrl: user.photoUrl),
+                  ProfilePhoto(photoUrl: user.photoUrl),
 
-                  // Gradient scrim (dark at bottom)
-                  const _GradientScrim(),
+                  const GradientScrim(),
 
-                  // LIKE/NOPE overlay
                   if (dragOffsetX > 20)
                     Positioned(
                       top: 48,
                       left: 20,
-                      child: _SwipeLabel(
+                      child: SwipeLabel(
                           label: 'LIKE', color: AppColors.trustGreen),
                     ),
                   if (dragOffsetX < -20)
@@ -238,14 +232,13 @@ class _CardContent extends StatelessWidget {
                       top: 48,
                       right: 20,
                       child:
-                          _SwipeLabel(label: 'NOPE', color: AppColors.primary),
+                          SwipeLabel(label: 'NOPE', color: AppColors.primary),
                     ),
 
-                  // Top buttons (white circles)
                   Positioned(
                     top: 14,
                     left: 14,
-                    child: _WhiteCircleBtn(
+                    child: WhiteCircleBtn(
                       icon: Icons.replay,
                       onTap: onUndo,
                     ),
@@ -253,29 +246,27 @@ class _CardContent extends StatelessWidget {
                   Positioned(
                     top: 14,
                     right: 14,
-                    child: _WhiteCircleBtn(
+                    child: WhiteCircleBtn(
                       icon: Icons.more_horiz,
                       onTap: onMore,
                     ),
                   ),
 
-                  // Bottom info overlay
                   Positioned(
                     left: 0,
                     right: 0,
                     bottom: 0,
-                    child: _CardInfo(user: user, isVerified: isVerified),
+                    child: CardInfo(user: user, isVerified: isVerified),
                   ),
                 ],
               ),
             ),
           ),
 
-          // Rose button — overlaps card at bottom-right
           Positioned(
             right: 0,
             bottom: 60,
-            child: _RoseButton(onTap: onLike),
+            child: RoseButton(onTap: onLike),
           ),
         ],
       ),
@@ -283,11 +274,10 @@ class _CardContent extends StatelessWidget {
   }
 }
 
-// ─── Photo ────────────────────────────────────────────────────────────────────
 
-class _ProfilePhoto extends StatelessWidget {
+class ProfilePhoto extends StatelessWidget {
   final String photoUrl;
-  const _ProfilePhoto({required this.photoUrl});
+  const ProfilePhoto({required this.photoUrl});
 
   @override
   Widget build(BuildContext context) {
@@ -328,10 +318,9 @@ class _ProfilePhoto extends StatelessWidget {
   }
 }
 
-// ─── Gradient Scrim ───────────────────────────────────────────────────────────
 
-class _GradientScrim extends StatelessWidget {
-  const _GradientScrim();
+class GradientScrim extends StatelessWidget {
+  const GradientScrim();
 
   @override
   Widget build(BuildContext context) {
@@ -353,12 +342,11 @@ class _GradientScrim extends StatelessWidget {
   }
 }
 
-// ─── Card Info Section ────────────────────────────────────────────────────────
 
-class _CardInfo extends StatelessWidget {
+class CardInfo extends StatelessWidget {
   final UserEntity user;
   final bool isVerified;
-  const _CardInfo({required this.user, this.isVerified = false});
+  const CardInfo({required this.user, this.isVerified = false});
 
   @override
   Widget build(BuildContext context) {
@@ -368,7 +356,6 @@ class _CardInfo extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
-          // Badges row
           SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             child: Row(
@@ -384,7 +371,6 @@ class _CardInfo extends StatelessWidget {
 
           const SizedBox(height: 10),
 
-          // Name + age (NO comma) + online dot
           Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
@@ -425,18 +411,17 @@ class _CardInfo extends StatelessWidget {
 
           const SizedBox(height: 6),
 
-          // Meta rows
-          _MetaRow(
+          MetaRow(
             icon: Icons.location_on,
             text: user.displayLocation,
           ),
           const SizedBox(height: 3),
-          _MetaRow(
+          MetaRow(
             icon: Icons.work_outline,
             text: '${user.occupation} · ${user.height}',
           ),
           const SizedBox(height: 3),
-          _MetaRow(
+          MetaRow(
             icon: Icons.favorite,
             text: user.relationshipIntent,
           ),
@@ -446,11 +431,11 @@ class _CardInfo extends StatelessWidget {
   }
 }
 
-class _MetaRow extends StatelessWidget {
+class MetaRow extends StatelessWidget {
   final IconData icon;
   final String text;
 
-  const _MetaRow({required this.icon, required this.text});
+  const MetaRow({required this.icon, required this.text});
 
   @override
   Widget build(BuildContext context) {
@@ -470,13 +455,12 @@ class _MetaRow extends StatelessWidget {
   }
 }
 
-// ─── White circle buttons ─────────────────────────────────────────────────────
 
-class _WhiteCircleBtn extends StatelessWidget {
+class WhiteCircleBtn extends StatelessWidget {
   final IconData icon;
   final VoidCallback? onTap;
 
-  const _WhiteCircleBtn({required this.icon, this.onTap});
+  const WhiteCircleBtn({required this.icon, this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -502,17 +486,16 @@ class _WhiteCircleBtn extends StatelessWidget {
   }
 }
 
-// ─── Rose / Like Button ───────────────────────────────────────────────────────
 
-class _RoseButton extends StatefulWidget {
+class RoseButton extends StatefulWidget {
   final VoidCallback? onTap;
-  const _RoseButton({this.onTap});
+  const RoseButton({this.onTap});
 
   @override
-  State<_RoseButton> createState() => _RoseButtonState();
+  State<RoseButton> createState() => _RoseButtonState();
 }
 
-class _RoseButtonState extends State<_RoseButton>
+class _RoseButtonState extends State<RoseButton>
     with SingleTickerProviderStateMixin {
   late AnimationController _glowController;
   late Animation<double> _glowAnim;
@@ -571,13 +554,12 @@ class _RoseButtonState extends State<_RoseButton>
   }
 }
 
-// ─── Swipe Label (LIKE / NOPE) ────────────────────────────────────────────────
 
-class _SwipeLabel extends StatelessWidget {
+class SwipeLabel extends StatelessWidget {
   final String label;
   final Color color;
 
-  const _SwipeLabel({required this.label, required this.color});
+  const SwipeLabel({required this.label, required this.color});
 
   @override
   Widget build(BuildContext context) {
@@ -603,16 +585,15 @@ class _SwipeLabel extends StatelessWidget {
   }
 }
 
-// ─── Swipe Up Hint ────────────────────────────────────────────────────────────
 
-class _SwipeUpHint extends StatefulWidget {
-  const _SwipeUpHint();
+class SwipeUpHint extends StatefulWidget {
+  const SwipeUpHint();
 
   @override
-  State<_SwipeUpHint> createState() => _SwipeUpHintState();
+  State<SwipeUpHint> createState() => _SwipeUpHintState();
 }
 
-class _SwipeUpHintState extends State<_SwipeUpHint>
+class _SwipeUpHintState extends State<SwipeUpHint>
     with SingleTickerProviderStateMixin {
   late AnimationController _bounceCtrl;
   late Animation<double> _bounceAnim;

@@ -21,14 +21,13 @@ class HomeProfileDetails extends StatelessWidget {
         const SizedBox(height: 16),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: _LightBadgesRow(user: user),
+          child: LightBadgesRow(user: user),
         ),
         const SizedBox(height: 20),
 
-        // ── ABOUT ──
-        const _SectionLabel(text: 'ABOUT'),
+        const SectionLabel(text: 'ABOUT'),
         const SizedBox(height: 10),
-        _SectionWithRose(
+        SectionWithRose(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Text(
@@ -39,43 +38,39 @@ class HomeProfileDetails extends StatelessWidget {
         ),
         const SizedBox(height: 16),
 
-        // ── THE BASICS ──
-        const _SectionLabel(text: 'THE BASICS'),
+        const SectionLabel(text: 'THE BASICS'),
         const SizedBox(height: 10),
-        _SectionWithRose(
-          child: _InfoCard(rows: [
-            const _InfoRow(icon: Icons.cake_outlined, label: 'Age', value: '21 years old', subtitle: '19 feb 1999'),
-            const _InfoRow(icon: Icons.straighten, label: 'Height', value: '5\'5" (165 cm)'),
-            const _InfoRow(icon: Icons.location_on_outlined, label: 'Lives in', value: 'Koregaon park', subtitle: 'Pune, Maharashtra'),
-            const _InfoRow(icon: Icons.favorite_border, label: 'Love language', value: 'Compliment', subtitle: 'Words of affirmation'),
-            const _InfoRow(icon: Icons.mosque_outlined, label: 'Religion', value: 'Hindu-Marathi'),
-            const _InfoRow(icon: Icons.format_list_bulleted, label: 'Interested in', value: 'Women - Dating'),
-            const _InfoRow(icon: Icons.wb_sunny_outlined, label: 'Zodiac', value: 'Scorpio', subtitle: 'Loyal - Passionate - Intuitive'),
-            const _InfoRow(icon: Icons.translate, label: 'Mother tongue', value: 'Marathi'),
-            const _InfoRow(icon: Icons.phone_outlined, label: 'Communication style', value: 'Phone calls over texts'),
+        SectionWithRose(
+          child: InfoCard(rows: [
+            const InfoRow(icon: Icons.cake_outlined, label: 'Age', value: '21 years old', subtitle: '19 feb 1999'),
+            const InfoRow(icon: Icons.straighten, label: 'Height', value: '5\'5" (165 cm)'),
+            const InfoRow(icon: Icons.location_on_outlined, label: 'Lives in', value: 'Koregaon park', subtitle: 'Pune, Maharashtra'),
+            const InfoRow(icon: Icons.favorite_border, label: 'Love language', value: 'Compliment', subtitle: 'Words of affirmation'),
+            const InfoRow(icon: Icons.mosque_outlined, label: 'Religion', value: 'Hindu-Marathi'),
+            const InfoRow(icon: Icons.format_list_bulleted, label: 'Interested in', value: 'Women - Dating'),
+            const InfoRow(icon: Icons.wb_sunny_outlined, label: 'Zodiac', value: 'Scorpio', subtitle: 'Loyal - Passionate - Intuitive'),
+            const InfoRow(icon: Icons.translate, label: 'Mother tongue', value: 'Marathi'),
+            const InfoRow(icon: Icons.phone_outlined, label: 'Communication style', value: 'Phone calls over texts'),
           ]),
         ),
         const SizedBox(height: 16),
 
-        // ── Video ──
-        _SectionWithRose(
-          child: _VideoCard(caption: 'Video intro · 0:28', userId: id),
+        SectionWithRose(
+          child: VideoCard(caption: 'Video intro · 0:28', userId: id),
         ),
         const SizedBox(height: 16),
 
-        // ── Prompt: Win me over ──
-        const _SectionWithRose(
-          child: _PromptCard(
+        const SectionWithRose(
+          child: PromptCard(
             prompt: 'The way to win me over is...',
             answer: 'A good book rec and a strong chai opinion.',
           ),
         ),
         const SizedBox(height: 16),
 
-        // ── CAREER & AMBITION ──
-        const _SectionLabel(text: 'CAREER & AMBITION'),
+        const SectionLabel(text: 'CAREER & AMBITION'),
         const SizedBox(height: 10),
-        _SectionWithRose(
+        SectionWithRose(
           child: Container(
             margin: const EdgeInsets.symmetric(horizontal: AppSpacing.lg),
             decoration: BoxDecoration(
@@ -86,13 +81,13 @@ class HomeProfileDetails extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const _InfoRow(icon: Icons.school_outlined, label: 'Education', value: 'NIFT Pune', subtitle: 'B. Des Fashion Design · 3rd year'),
+                const InfoRow(icon: Icons.school_outlined, label: 'Education', value: 'NIFT Pune', subtitle: 'B. Des Fashion Design · 3rd year'),
                 const Divider(height: 1, color: AppColors.divider, indent: 48, endIndent: 0),
-                const _InfoRow(icon: Icons.work_outline, label: 'Work as', value: 'Fashion Design', subtitle: 'Freelance · 2 yrs exp'),
+                const InfoRow(icon: Icons.work_outline, label: 'Work as', value: 'Fashion Design', subtitle: 'Freelance · 2 yrs exp'),
                 const Divider(height: 1, color: AppColors.divider, indent: 48, endIndent: 0),
-                const _InfoRow(icon: Icons.auto_awesome_outlined, label: 'Work style', value: 'Creative · Hybrid'),
+                const InfoRow(icon: Icons.auto_awesome_outlined, label: 'Work style', value: 'Creative · Hybrid'),
                 const Divider(height: 1, color: AppColors.divider, indent: 48, endIndent: 0),
-                const _InfoRow(icon: Icons.trending_up, label: 'Ambition level', value: 'HIGHLY DRIVEN', bold: true),
+                const InfoRow(icon: Icons.trending_up, label: 'Ambition level', value: 'HIGHLY DRIVEN', bold: true),
                 const Divider(height: 1, color: AppColors.divider, indent: 16, endIndent: 16),
                 const SizedBox(height: 14),
                 Padding(
@@ -113,77 +108,70 @@ class HomeProfileDetails extends StatelessWidget {
         ),
         const SizedBox(height: 16),
 
-        // ── Detail Photo ──
-        _SectionWithRose(
-          child: _DetailPhoto(photoUrl: user.photoUrl, index: 1, userId: id),
+        SectionWithRose(
+          child: DetailPhoto(photoUrl: user.photoUrl, index: 1, userId: id),
         ),
         const SizedBox(height: 16),
 
-        // ── Prompt: My simple pleasures ──
-        const _SectionWithRose(
-          child: _PromptCard(
+        const SectionWithRose(
+          child: PromptCard(
             prompt: 'My simple pleasures...',
             answer: 'Roadside chai after a long trek, no signal, good company.',
           ),
         ),
         const SizedBox(height: 16),
 
-        // ── INTERESTS & HOBBIES ──
-        const _SectionLabel(text: 'INTERESTS & HOBBIES'),
+        const SectionLabel(text: 'INTERESTS & HOBBIES'),
         const SizedBox(height: 12),
-        _SectionWithRose(
+        SectionWithRose(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Wrap(
               spacing: 8,
               runSpacing: 8,
               children: const [
-                _HobbyChip(label: 'Travel', icon: Icons.flight_outlined),
-                _HobbyChip(label: 'Coffee', icon: Icons.coffee_outlined),
-                _HobbyChip(label: 'Trekking', icon: Icons.terrain_outlined),
-                _HobbyChip(label: 'Books', icon: Icons.menu_book_outlined),
-                _HobbyChip(label: 'Yoga', icon: Icons.self_improvement),
-                _HobbyChip(label: 'Indie music', icon: Icons.music_note_outlined),
-                _HobbyChip(label: 'Cooking', icon: Icons.favorite_border),
-                _HobbyChip(label: 'Photography', icon: Icons.camera_alt_outlined),
+                HobbyChip(label: 'Travel', icon: Icons.flight_outlined),
+                HobbyChip(label: 'Coffee', icon: Icons.coffee_outlined),
+                HobbyChip(label: 'Trekking', icon: Icons.terrain_outlined),
+                HobbyChip(label: 'Books', icon: Icons.menu_book_outlined),
+                HobbyChip(label: 'Yoga', icon: Icons.self_improvement),
+                HobbyChip(label: 'Indie music', icon: Icons.music_note_outlined),
+                HobbyChip(label: 'Cooking', icon: Icons.favorite_border),
+                HobbyChip(label: 'Photography', icon: Icons.camera_alt_outlined),
               ],
             ),
           ),
         ),
         const SizedBox(height: 16),
 
-        // ── LIFESTYLE ──
-        const _SectionLabel(text: 'LIFESTYLE'),
+        const SectionLabel(text: 'LIFESTYLE'),
         const SizedBox(height: 10),
-        const _SectionWithRose(
-          child: _InfoCard(rows: [
-            _InfoRow(icon: Icons.restaurant_outlined, label: 'Diet', value: 'Vegetarian'),
-            _InfoRow(icon: Icons.wine_bar_outlined, label: 'Drinking', value: 'Socially'),
-            _InfoRow(icon: Icons.smoke_free, label: 'Smoking', value: 'Non-smoker'),
-            _InfoRow(icon: Icons.fitness_center, label: 'Fitness', value: 'Gym 4x/week', subtitle: 'Yoga · Trekking'),
-            _InfoRow(icon: Icons.explore_outlined, label: 'Travel', value: '4-5 trips/year'),
-            _InfoRow(icon: Icons.pets_outlined, label: 'Pets', value: 'Cat parent'),
-            _InfoRow(icon: Icons.bedtime_outlined, label: 'Sleep', value: 'Night Owl'),
+        const SectionWithRose(
+          child: InfoCard(rows: [
+            InfoRow(icon: Icons.restaurant_outlined, label: 'Diet', value: 'Vegetarian'),
+            InfoRow(icon: Icons.wine_bar_outlined, label: 'Drinking', value: 'Socially'),
+            InfoRow(icon: Icons.smoke_free, label: 'Smoking', value: 'Non-smoker'),
+            InfoRow(icon: Icons.fitness_center, label: 'Fitness', value: 'Gym 4x/week', subtitle: 'Yoga · Trekking'),
+            InfoRow(icon: Icons.explore_outlined, label: 'Travel', value: '4-5 trips/year'),
+            InfoRow(icon: Icons.pets_outlined, label: 'Pets', value: 'Cat parent'),
+            InfoRow(icon: Icons.bedtime_outlined, label: 'Sleep', value: 'Night Owl'),
           ]),
         ),
         const SizedBox(height: 16),
 
-        // ── DATING GOAL ──
-        const _GoalCard(
+        const GoalCard(
           goal: 'Long-term, marriage-open',
           desc: 'No pressure, no timelines — just looking for the right person to build something real with.',
         ),
         const SizedBox(height: 20),
 
-        // ── Bottom Detail Photo ──
-        _SectionWithRose(
-          child: _DetailPhoto(photoUrl: user.photoUrl, index: 2, userId: id),
+        SectionWithRose(
+          child: DetailPhoto(photoUrl: user.photoUrl, index: 2, userId: id),
         ),
         const SizedBox(height: 16),
 
-        // ── Prompt: We'll get along if ──
-        const _SectionWithRose(
-          child: _PromptCard(
+        const SectionWithRose(
+          child: PromptCard(
             prompt: "We'll get along if...",
             answer: 'You can debate me for an hour and still want dessert after.',
           ),
@@ -194,11 +182,9 @@ class HomeProfileDetails extends StatelessWidget {
   }
 }
 
-/// Wraps a child widget and positions a rose pin at the bottom-right,
-/// overlapping the child's bottom edge.
-class _SectionWithRose extends StatelessWidget {
+class SectionWithRose extends StatelessWidget {
   final Widget child;
-  const _SectionWithRose({required this.child});
+  const SectionWithRose({required this.child});
 
   @override
   Widget build(BuildContext context) {
@@ -212,7 +198,7 @@ class _SectionWithRose extends StatelessWidget {
           alignment: Alignment.centerRight,
           child: Padding(
             padding: EdgeInsets.only(right: 24),
-            child: _RosePin(),
+            child: RosePin(),
           ),
         ),
       ],
@@ -220,10 +206,10 @@ class _SectionWithRose extends StatelessWidget {
   }
 }
 
-class _ColorPhoto extends StatelessWidget {
+class ColorPhoto extends StatelessWidget {
   final int index;
   final String userId;
-  const _ColorPhoto({required this.index, required this.userId});
+  const ColorPhoto({required this.index, required this.userId});
 
   @override
   Widget build(BuildContext context) {
@@ -240,9 +226,9 @@ class _ColorPhoto extends StatelessWidget {
   }
 }
 
-class _LightBadgesRow extends StatelessWidget {
+class LightBadgesRow extends StatelessWidget {
   final UserEntity user;
-  const _LightBadgesRow({required this.user});
+  const LightBadgesRow({required this.user});
 
   @override
   Widget build(BuildContext context) {
@@ -250,18 +236,18 @@ class _LightBadgesRow extends StatelessWidget {
       spacing: 8,
       runSpacing: 6,
       children: [
-        _LightBadge(dot: AppColors.matchBlue, label: '${user.matchPercent}% Match'),
-        _LightBadge(dot: AppColors.trustGreen, label: '${user.trustPercent}% Trust'),
-        _LightBadge(dot: AppColors.replyOrange, label: '~${user.replyTime} Replies'),
+        LightBadge(dot: AppColors.matchBlue, label: '${user.matchPercent}% Match'),
+        LightBadge(dot: AppColors.trustGreen, label: '${user.trustPercent}% Trust'),
+        LightBadge(dot: AppColors.replyOrange, label: '~${user.replyTime} Replies'),
       ],
     );
   }
 }
 
-class _LightBadge extends StatelessWidget {
+class LightBadge extends StatelessWidget {
   final Color dot;
   final String label;
-  const _LightBadge({required this.dot, required this.label});
+  const LightBadge({required this.dot, required this.label});
 
   @override
   Widget build(BuildContext context) {
@@ -287,9 +273,9 @@ class _LightBadge extends StatelessWidget {
   }
 }
 
-class _SectionLabel extends StatelessWidget {
+class SectionLabel extends StatelessWidget {
   final String text;
-  const _SectionLabel({required this.text});
+  const SectionLabel({required this.text});
 
   @override
   Widget build(BuildContext context) {
@@ -300,8 +286,8 @@ class _SectionLabel extends StatelessWidget {
   }
 }
 
-class _RosePin extends StatelessWidget {
-  const _RosePin();
+class RosePin extends StatelessWidget {
+  const RosePin();
 
   @override
   Widget build(BuildContext context) {
@@ -330,9 +316,9 @@ class _RosePin extends StatelessWidget {
   }
 }
 
-class _InfoCard extends StatelessWidget {
-  final List<_InfoRow> rows;
-  const _InfoCard({required this.rows});
+class InfoCard extends StatelessWidget {
+  final List<InfoRow> rows;
+  const InfoCard({required this.rows});
 
   @override
   Widget build(BuildContext context) {
@@ -363,14 +349,14 @@ class _InfoCard extends StatelessWidget {
   }
 }
 
-class _InfoRow extends StatelessWidget {
+class InfoRow extends StatelessWidget {
   final IconData icon;
   final String label;
   final String value;
   final String subtitle;
   final bool bold;
 
-  const _InfoRow({
+  const InfoRow({
     required this.icon,
     required this.label,
     required this.value,
@@ -409,12 +395,12 @@ class _InfoRow extends StatelessWidget {
   }
 }
 
-class _DetailPhoto extends StatelessWidget {
+class DetailPhoto extends StatelessWidget {
   final String photoUrl;
   final int index;
   final String userId;
 
-  const _DetailPhoto({
+  const DetailPhoto({
     required this.photoUrl,
     required this.index,
     required this.userId,
@@ -438,20 +424,20 @@ class _DetailPhoto extends StatelessWidget {
               imageUrl: photoUrl,
               fit: BoxFit.cover,
               errorWidget: (_, __, ___) =>
-                  _ColorPhoto(index: index, userId: userId),
+                  ColorPhoto(index: index, userId: userId),
             )
           else
-            _ColorPhoto(index: index, userId: userId),
+            ColorPhoto(index: index, userId: userId),
         ],
       ),
     );
   }
 }
 
-class _HobbyChip extends StatelessWidget {
+class HobbyChip extends StatelessWidget {
   final String label;
   final IconData icon;
-  const _HobbyChip({required this.label, required this.icon});
+  const HobbyChip({required this.label, required this.icon});
 
   @override
   Widget build(BuildContext context) {
@@ -478,10 +464,10 @@ class _HobbyChip extends StatelessWidget {
   }
 }
 
-class _GoalCard extends StatelessWidget {
+class GoalCard extends StatelessWidget {
   final String goal;
   final String desc;
-  const _GoalCard({required this.goal, required this.desc});
+  const GoalCard({required this.goal, required this.desc});
 
   @override
   Widget build(BuildContext context) {
@@ -506,10 +492,10 @@ class _GoalCard extends StatelessWidget {
   }
 }
 
-class _PromptCard extends StatelessWidget {
+class PromptCard extends StatelessWidget {
   final String prompt;
   final String answer;
-  const _PromptCard({required this.prompt, required this.answer});
+  const PromptCard({required this.prompt, required this.answer});
 
   @override
   Widget build(BuildContext context) {
@@ -579,16 +565,16 @@ class _PromptCard extends StatelessWidget {
   }
 }
 
-class _VideoCard extends StatefulWidget {
+class VideoCard extends StatefulWidget {
   final String caption;
   final String userId;
-  const _VideoCard({required this.caption, required this.userId});
+  const VideoCard({required this.caption, required this.userId});
 
   @override
-  State<_VideoCard> createState() => _VideoCardState();
+  State<VideoCard> createState() => _VideoCardState();
 }
 
-class _VideoCardState extends State<_VideoCard> {
+class _VideoCardState extends State<VideoCard> {
   bool _playing = false;
 
   static const List<List<Color>> _gradients = [
